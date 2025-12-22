@@ -3,7 +3,7 @@ import Foundation
 class Buyer: User {
     static var nextId: Int = 1
     let id: Int
-    let name: String
+    var name: String
     var password: String
     var bills: [Bill] = []
 
@@ -14,25 +14,17 @@ class Buyer: User {
         self.password = password
     }
     
-    func buyItem(_ itemId: Int,from sellerId: Int) {
+    func buyItem(_ itemId: Int,from seller: Seller) {
         
-        var seller: Seller?
-        
-        for element in sellers {
-            if(element.id == sellerId){
-                seller = element
-                break
-            }
-        }
-        
-        guard let item = seller?.inventory.sellItem(id: itemId),
-              let newBill = BillService.createBill(buyer: self, seller: seller!,products: [item])
+        guard let item = seller.inventory.sellItem(id: itemId),
+              let newBill = BillService.createBill(buyer: self, seller: seller,products: [item])
         else {
             print("\n Error in completing the buy sell transaction ‼️\n")
             return
         }
         
         bills.append(newBill)
+        print(newBill.order.shipment.path)
         
     }
     

@@ -24,7 +24,10 @@ struct BillService {
             orderItems.append(OrderItem(item: item, quantity: quantity))
         }
         
-        guard let order = AppFactory.createOrder(buyer: buyer, seller: seller, items: orderItems, from: source, to: destination) else {
+        guard let order = Order(buyer: buyer,seller: seller,
+                                items: orderItems,from: source,
+                                to: destination)
+        else {
             return nil
         }
         

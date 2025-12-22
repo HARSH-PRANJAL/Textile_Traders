@@ -13,20 +13,20 @@ class TransportGraph {
         addLocation(edge.to)
 
         guard let _ = adjacencyList[edge.from]?.append(edge) else {
-            print("Failed to add new transport : \(edge.transportType)")
+            print("Failed to add new transport")
             return
         }
 
         let reverseEdge = TransportEdge(
             from: edge.to,
             to: edge.from,
-            transportType: edge.transportType,
+            type: edge.type,
             farePerTon: edge.farePerTon,
             travelTimeHours: edge.travelTimeHours
         )
 
         guard let _ = adjacencyList[edge.to]?.append(reverseEdge) else {
-            print("Failed to add rerouting to new transport : \(edge.transportType)")
+            print("Failed to add rerouting to new transport")
             return
         }
     }

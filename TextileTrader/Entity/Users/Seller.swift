@@ -3,7 +3,7 @@ import Foundation
 class Seller: User {
     static var nextId: Int = 1
     let id: Int
-    let name: String
+    var name: String
     var password: String
     private(set) var inventory = Inventory()
 

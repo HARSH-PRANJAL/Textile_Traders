@@ -3,7 +3,7 @@ import Foundation
 class ServiceProvider: User {
     static var nextId: Int = 1
     let id: Int
-    let name: String
+    var name: String
     let graph: TransportGraph
     var password: String
 
@@ -16,16 +16,14 @@ class ServiceProvider: User {
     }
 
     func registerLocation(code: String, pin: Int, name: String) {
-        let location = AppFactory.createLocation(code: code,pin: pin,name: name)
+        let location = Location(code: code,pin: pin,name: name)
         graph.addLocation(location)
     }
 
-    func addTransport(from: Location,to: Location,
-                      type: TransportType,farePerTon: Double,
+    func addTransport(from: Location,to: Location,type: TransportType,farePerTon: Double,
                       timeHours: Double)
     {
-        let edge = TransportEdge(from: from,to: to,
-                                 transportType: type,farePerTon: farePerTon,
+        let edge = TransportEdge(from: from,to: to,type: type,farePerTon: farePerTon,
                                  travelTimeHours: timeHours )
         graph.addEdge(edge)
     }

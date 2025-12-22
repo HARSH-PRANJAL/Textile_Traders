@@ -86,11 +86,7 @@ func buyerMenu(buyer: Buyer) {
         case "1":
             MenuService.listAllItems()
         case "2":
-            print("Enter item id : ",terminator: " ")
-            let itemId =  IO.readInt()
-            print("Enter seller id : ",terminator: " ")
-            let sellerId = IO.readInt()
-            buyer.buyItem(itemId, from: sellerId)
+            MenuService.buyItem(buyer: buyer)
         case "3":
             buyer.displayBills()
         case "4":
@@ -124,7 +120,7 @@ func sellerMenu(seller: Seller) {
                let name = readLine()!
                print("Item price : ",terminator: " ")
                let price = IO.readDouble()
-               seller.addItem(AppFactory.createItem(name: name, price: price))
+               seller.addItem(Item(name: name, pricePerUnit: price))
            case "2":
                print("\(seller.inventory.listAll())")
            case "3":
@@ -151,9 +147,9 @@ buyerMenu(buyer: buyers[0])
 
 
 
-//let A = AppFactory.createLocation(code: "A", pin: 1001, name: "Alpha")
-//let B = AppFactory.createLocation(code: "B", pin: 1002, name: "Beta")
-//let C = AppFactory.createLocation(code: "C", pin: 1003, name: "Gamma")
+//let A = Location(code: "A", pin: 1001, name: "Alpha")
+//let B = Location(code: "B", pin: 1002, name: "Beta")
+//let C = Location(code: "C", pin: 1003, name: "Gamma")
 //
 //transportGraph.addEdge(TransportEdge(from: A, to: B, transportType: .truck, farePerTon: 10, travelTimeHours: 5))
 //transportGraph.addEdge(TransportEdge(from: B, to: C, transportType: .truck, farePerTon: 8, travelTimeHours: 4))

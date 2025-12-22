@@ -78,7 +78,7 @@ struct TransportService {
             return
         }
 
-        let location = AppFactory.createLocation(
+        let location = Location(
             code: code,
             pin: pin,
             name: name

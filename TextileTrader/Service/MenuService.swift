@@ -1,46 +1,46 @@
 struct MenuService {
-    
+
     static func registerBuyer() {
-        print("Enter buyer name: ",terminator: " ")
+        print("Enter buyer name: ", terminator: " ")
         let name = readLine() ?? "Unknown Buyer"
-        print("Enter buyer password: ",terminator: " ")
+        print("Enter buyer password: ", terminator: " ")
         let password = readLine() ?? "123"
-        
-        if(password == "123"){
+
+        if password == "123" {
             print("You are using default password")
         }
-        
-        let buyer = AppFactory.createBuyer(name: name,password: password)
+
+        let buyer = Buyer(name: name, password: password)
         buyers.append(buyer)
         print("Buyer registered successfully ✅")
     }
 
     static func registerSeller() {
-        print("Enter seller name: ",terminator: " ")
+        print("Enter seller name: ", terminator: " ")
         let name = readLine() ?? "Unknown Seller"
-        print("Enter seller password: ",terminator: " ")
+        print("Enter seller password: ", terminator: " ")
         let password = readLine() ?? "123"
-        
-        if(password == "123"){
+
+        if password == "123" {
             print("You are using default password")
         }
-        
-        let seller = AppFactory.createSeller(name: name,password: password)
+
+        let seller = Seller(name: name, password: password)
         sellers.append(seller)
         print("Seller registered successfully ✅")
     }
 
     static func registerServiceProvider() {
-        print("Enter service provider name: ",terminator: " ")
+        print("Enter service provider name: ", terminator: " ")
         let name = readLine() ?? "Unknown Provider"
-        print("Enter service provider password: ",terminator: " ")
+        print("Enter service provider password: ", terminator: " ")
         let password = readLine() ?? "123"
-        
-        if(password == "123"){
+
+        if password == "123" {
             print("You are using default password")
         }
 
-        let provider = AppFactory.createServiceProvider(
+        let provider = ServiceProvider(
             name: name,
             graph: transportGraph,
             password: password
@@ -49,14 +49,36 @@ struct MenuService {
         serviceProviders.append(provider)
         print("Service Provider registered successfully ✅")
     }
-    
+
     static func listAllItems() {
-        
+
         for seller in sellers {
             print("\nSeller: \(seller.name) \(seller.id)")
             print("\nItems : \n \(seller.inventory.listAll())")
         }
-        
+
     }
-    
+
+    static func buyItem(buyer: Buyer) {
+        print("Enter item id : ", terminator: " ")
+        let itemId = IO.readInt()
+        print("Enter seller id : ", terminator: " ")
+        let sellerId = IO.readInt()
+
+        var seller: Seller? = nil
+
+        for s in sellers {
+            if s.id == sellerId {
+                seller = s
+            }
+        }
+
+        if seller != nil {
+            buyer.buyItem(itemId, from: seller!)
+        } else {
+            print(" Seller not found ‼️ ")
+        }
+
+    }
+
 }
