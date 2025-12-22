@@ -5,13 +5,13 @@ class Order {
     let id: Int
     let buyer: Buyer
     let seller: Seller
-    let items: [OrderItem]
+    let item: OrderItem
     let shipment: Shipment
 
     init?(
         buyer: Buyer,
         seller: Seller,
-        items: [OrderItem],
+        item: OrderItem,
         from: Location,
         to: Location
     ) {
@@ -19,13 +19,9 @@ class Order {
         Order.nextId += 1
         self.buyer = buyer
         self.seller = seller
-        self.items = items
+        self.item = item
 
-        var cargoWeight: Double = 0
-
-        for item in items {
-            cargoWeight += item.quantity
-        }
+        var cargoWeight = item.quantity
 
         let calculator = FareRouteCalculator()
         guard

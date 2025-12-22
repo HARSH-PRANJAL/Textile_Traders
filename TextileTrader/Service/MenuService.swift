@@ -69,6 +69,8 @@ struct MenuService {
         let itemId = IO.readInt()
         print("Enter seller id : ", terminator: " ")
         let sellerId = IO.readInt()
+        print("Enter Item Quantity : ", terminator: " ")
+        let quantity = IO.readDouble()
 
         var seller: Seller? = nil
 
@@ -78,11 +80,36 @@ struct MenuService {
             }
         }
 
-        if seller != nil {
-            buyer.buyItem(itemId, from: seller!)
-        } else {
+        if seller == nil {
             print(" Seller not found ‼️ ")
+            return
         }
+
+        guard let item = seller!.inventory.getItem(id: itemId) else {
+            print(" Item not found ‼️ ")
+            return
+        }
+
+        print("Enter pickup location pin : ", terminator: " ")
+        let pickupPin = IO.readInt()
+        guard let source = locations[pickupPin] else {
+            print("Invalid pickup location ‼️")
+            return
+        }
+
+        let deliveryPin = IO.readInt()
+        guard let destination = locations[deliveryPin] else {
+            print("Invalid delivery location ‼️")
+            return
+        }
+
+        buyer.buyItem(
+            item,
+            from: seller!,
+            quantity: quantity,
+            pickupLocation: source,
+            dropLocation: destination
+        )
 
     }
 

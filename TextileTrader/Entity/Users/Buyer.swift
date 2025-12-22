@@ -13,21 +13,35 @@ class Buyer: User {
         self.name = name
         self.password = password
     }
-    
-    func buyItem(_ itemId: Int,from seller: Seller) {
-        
-        guard let item = seller.inventory.sellItem(id: itemId),
-              let newBill = BillService.createBill(buyer: self, seller: seller,products: [item])
+
+    func buyItem(
+        _ item: Item,
+        from seller: Seller,
+        quantity: Double,
+        pickupLocation: Location,
+        dropLocation: Location
+    ) {
+
+        var orderItem = OrderItem(item: item, quantity: quantity)
+        guard
+            let order = Order(
+                buyer: self,
+                seller: seller,
+                item: orderItem,
+                from: pickupLocation,
+                to: dropLocation
+            )
         else {
-            print("\n Error in completing the buy sell transaction ‼️\n")
+            print("Source or Destination is not reachable ")
             return
         }
-        
-        bills.append(newBill)
-        
+
+        let newBill = Bill(order: order)
+        self.bills.append(newBill)
+
     }
-    
-    func displayBills(){
+
+    func displayBills() {
         for bill in bills {
             print("\n Bill ID: \(bill.order.id)")
             print("Seller Name: \(bill.order.seller.name)")
@@ -35,6 +49,5 @@ class Buyer: User {
             print("Path: \(bill.order.shipment.path)\n")
         }
     }
-    
-    
+
 }

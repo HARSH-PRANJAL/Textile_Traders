@@ -18,4 +18,8 @@ class Inventory {
     func sellItem(id: Int) -> Item? {
         return items.removeValue(forKey: id)
     }
+    
+    func hasItem(id: Int) -> Bool {
+        items.keys.contains(id)
+    }
 }

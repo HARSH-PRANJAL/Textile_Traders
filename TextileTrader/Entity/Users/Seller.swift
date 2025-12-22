@@ -6,7 +6,7 @@ class Seller: User {
     var name: String
     var password: String
     private(set) var inventory = Inventory()
-
+    
     init(name: String, password: String) {
         self.id = Seller.nextId
         Seller.nextId += 1
@@ -17,7 +17,7 @@ class Seller: User {
     func addItem(_ item: Item) {
         inventory.add(item)
     }
-
+    
     func listItem() -> [Item] {
         return inventory.listAll()
     }
