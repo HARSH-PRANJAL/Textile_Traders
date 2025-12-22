@@ -24,7 +24,6 @@ class Buyer: User {
         }
         
         bills.append(newBill)
-        print(newBill.order.shipment.path)
         
     }
     

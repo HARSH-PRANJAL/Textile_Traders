@@ -54,7 +54,12 @@ struct MenuService {
 
         for seller in sellers {
             print("\nSeller: \(seller.name) \(seller.id)")
-            print("\nItems : \n \(seller.inventory.listAll())")
+
+            for item in seller.inventory.listAll() {
+                print("Item ID : \(item.id)")
+                print("Item : \(item.name)")
+                print("Item Unit Price : \(item.pricePerUnit)")
+            }
         }
 
     }

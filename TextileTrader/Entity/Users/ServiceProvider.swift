@@ -16,15 +16,24 @@ class ServiceProvider: User {
     }
 
     func registerLocation(code: String, pin: Int, name: String) {
-        let location = Location(code: code,pin: pin,name: name)
+        let location = Location(code: code, pin: pin, name: name)
         graph.addLocation(location)
     }
 
-    func addTransport(from: Location,to: Location,type: TransportType,farePerTon: Double,
-                      timeHours: Double)
-    {
-        let edge = TransportEdge(from: from,to: to,type: type,farePerTon: farePerTon,
-                                 travelTimeHours: timeHours )
+    func addTransport(
+        from: Location,
+        to: Location,
+        type: TransportType,
+        farePerTon: Double,
+        timeHours: Double
+    ) {
+        let edge = TransportEdge(
+            from: from,
+            to: to,
+            type: type,
+            farePerTon: farePerTon,
+            travelTimeHours: timeHours
+        )
         graph.addEdge(edge)
     }
 }

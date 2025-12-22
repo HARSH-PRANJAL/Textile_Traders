@@ -19,4 +19,5 @@ class Shipment {
         self.totalFare = totalFare
         self.expectedTimeHours = expectedTimeHours
     }
+    
 }
