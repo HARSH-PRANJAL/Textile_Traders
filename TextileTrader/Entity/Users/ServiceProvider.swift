@@ -1,0 +1,43 @@
+import Foundation
+
+class ServiceProvider: User {
+
+    let id = UUID()
+    let name: String
+    let graph: TransportGraph
+
+    init(name: String, graph: TransportGraph) {
+        self.name = name
+        self.graph = graph
+    }
+
+    func registerLocation(
+        code: String,
+        pin: Int,
+        name: String
+    ) {
+        let location = AppFactory.createLocation(
+            code: code,
+            pin: pin,
+            name: name
+        )
+        graph.addLocation(location)
+    }
+
+    func addTransport(
+        from: Location,
+        to: Location,
+        type: TransportType,
+        farePerTon: Double,
+        timeHours: Double
+    ) {
+        let edge = TransportEdge(
+            from: from,
+            to: to,
+            transportType: type,
+            farePerTon: farePerTon,
+            travelTimeHours: timeHours
+        )
+        graph.addEdge(edge)
+    }
+}
