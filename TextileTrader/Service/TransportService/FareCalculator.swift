@@ -2,11 +2,9 @@ class FareRouteCalculator {
 
     let graph = transportGraph
 
-    func calculateFare(
-        from source: Location,
-        to destination: Location,
-        cargoWeight: Double
-    ) -> FareRouteResult? {
+    func calculateFare(from source: Location,to destination: Location,
+                       cargoWeight: Double) -> FareRouteResult?
+    {
 
         var fareDistance: [Location: Double] = [:]
         var timeDistance: [Location: Double] = [:]
@@ -33,8 +31,6 @@ class FareRouteCalculator {
                 }
             }
 
-            
-
             guard let currentLocation = current else {
                 break
             }
@@ -57,16 +53,23 @@ class FareRouteCalculator {
 
         guard let finalFare = fareDistance[destination],
               let finalTime = timeDistance[destination],
-              finalFare != Double.infinity else {
+              finalFare != Double.infinity
+        else {
             return nil
         }
 
         var path: [Location] = []
         var current: Location? = destination
 
-        while let loc = current {
+        while current != nil {
+            
+            guard let loc = current else{
+                break
+            }
+            
             path.append(loc)
             current = previous[loc]
+            
         }
 
         return FareRouteResult(

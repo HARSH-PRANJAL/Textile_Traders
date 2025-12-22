@@ -3,7 +3,7 @@ struct IO {
         while true {
             if let input = readLine(), let number = Int(input) {
                 return number
-            }else{
+            } else {
                 print("\nYour input is not a number provide correct input !!!!\n")
             }
         }
@@ -13,7 +13,7 @@ struct IO {
         while true {
             if let input = readLine(), let number = Double(input) {
                 return number
-            }else{
+            } else {
                 print("\nYour input is not a number provide correct input !!!!\n")
             }
         }

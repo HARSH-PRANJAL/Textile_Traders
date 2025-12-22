@@ -6,13 +6,10 @@ class Shipment {
     let totalFare: Double
     let expectedTimeHours: Double
 
-    init(
-        from: Location,
-        to: Location,
-        path: [Location],
-        totalFare: Double,
-        expectedTimeHours: Double
-    ) {
+    init(from: Location, to: Location,
+        path: [Location], totalFare: Double,
+        expectedTimeHours: Double)
+    {
         self.from = from
         self.to = to
         self.path = path

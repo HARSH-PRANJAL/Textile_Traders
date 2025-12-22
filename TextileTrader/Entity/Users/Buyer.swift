@@ -26,7 +26,7 @@ class Buyer: User {
         }
         
         guard let item = seller?.inventory.sellItem(id: itemId),
-        let newBill = BillService.createBill(buyer: self, seller: seller!,products: [item])
+              let newBill = BillService.createBill(buyer: self, seller: seller!,products: [item])
         else {
             print("\n Error in completing the buy sell transaction ‼️\n")
             return
