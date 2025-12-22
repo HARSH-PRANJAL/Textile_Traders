@@ -5,10 +5,12 @@ class ServiceProvider: User {
     let id = UUID()
     let name: String
     let graph: TransportGraph
+    var password: String
 
-    init(name: String, graph: TransportGraph) {
+    init(name: String, graph: TransportGraph, password: String) {
         self.name = name
         self.graph = graph
+        self.password = password
     }
 
     func registerLocation(
