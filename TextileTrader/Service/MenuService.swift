@@ -1,14 +1,8 @@
 func registerBuyer() {
     print("Enter buyer name: ", terminator: " ")
     let name = readLine() ?? "Unknown Buyer"
-    print("Enter buyer password: ", terminator: " ")
-    let password = readLine() ?? "123"
 
-    if password == "123" {
-        print("You are using default password")
-    }
-
-    let buyer = Buyer(name: name, password: password)
+    let buyer = Buyer(name: name)
     buyers.append(buyer)
     print("Buyer registered successfully ✅")
 }
@@ -16,14 +10,8 @@ func registerBuyer() {
 func registerSeller() {
     print("Enter seller name: ", terminator: " ")
     let name = readLine() ?? "Unknown Seller"
-    print("Enter seller password: ", terminator: " ")
-    let password = readLine() ?? "123"
 
-    if password == "123" {
-        print("You are using default password")
-    }
-
-    let seller = Seller(name: name, password: password)
+    let seller = Seller(name: name)
     sellers.append(seller)
     print("Seller registered successfully ✅")
 }
@@ -31,17 +19,8 @@ func registerSeller() {
 func registerServiceProvider() {
     print("Enter service provider name: ", terminator: " ")
     let name = readLine() ?? "Unknown Provider"
-    print("Enter service provider password: ", terminator: " ")
-    let password = readLine() ?? "123"
 
-    if password == "123" {
-        print("You are using default password")
-    }
-
-    let provider = ServiceProvider(
-        name: name,
-        password: password
-    )
+    let provider = ServiceProvider( name: name )
 
     serviceProviders.append(provider)
     print("Service Provider registered successfully ✅")

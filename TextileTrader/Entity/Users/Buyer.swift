@@ -4,14 +4,12 @@ class Buyer: User {
     static var nextId: Int = 1
     let id: Int
     var name: String
-    var password: String
     var bills: [Bill] = []
 
-    init(name: String, password: String) {
+    init(name: String) {
         self.id = Buyer.nextId
         Buyer.nextId += 1
         self.name = name
-        self.password = password
     }
 
     func buyItem(
@@ -39,7 +37,6 @@ class Buyer: User {
         seller.inventory.sellItem(id: item.id)
         let newBill = Bill(order: order)
         self.bills.append(newBill)
-
     }
 
     func displayBills() {
