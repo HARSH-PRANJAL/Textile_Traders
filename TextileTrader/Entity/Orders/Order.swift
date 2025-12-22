@@ -21,14 +21,11 @@ class Order {
         self.seller = seller
         self.item = item
 
-        var cargoWeight = item.quantity
-
-        let calculator = FareRouteCalculator()
         guard
-            let route = calculator.calculateFare(
+            let route = calculateFare(
                 from: from,
                 to: to,
-                cargoWeight: cargoWeight
+                cargoWeight: item.quantity
             )
         else {
             print(

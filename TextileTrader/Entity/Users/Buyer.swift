@@ -22,7 +22,7 @@ class Buyer: User {
         dropLocation: Location
     ) {
 
-        var orderItem = OrderItem(item: item, quantity: quantity)
+        let orderItem = OrderItem(item: item, quantity: quantity)
         guard
             let order = Order(
                 buyer: self,
@@ -35,7 +35,8 @@ class Buyer: User {
             print("Source or Destination is not reachable ")
             return
         }
-
+        
+        seller.inventory.sellItem(id: item.id)
         let newBill = Bill(order: order)
         self.bills.append(newBill)
 
@@ -45,8 +46,8 @@ class Buyer: User {
         for bill in bills {
             print("\n Bill ID: \(bill.order.id)")
             print("Seller Name: \(bill.order.seller.name)")
-            print("Total: \(bill.generateTotalAmount())")
-            print("Path: \(bill.order.shipment.path)\n")
+            print("Total Amount: \(bill.generateTotalAmount())")
+            print("Path: \(bill.order.shipment.displayPath())\n")
         }
     }
 

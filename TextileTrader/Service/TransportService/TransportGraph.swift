@@ -18,6 +18,7 @@ class TransportGraph {
         }
 
         let reverseEdge = TransportEdge(
+            contactPersonId: edge.contactPersonId,
             from: edge.to,
             to: edge.from,
             type: edge.type,

@@ -6,146 +6,41 @@ var serviceProviders: [ServiceProvider] = []
 let transportGraph = TransportGraph()
 var locations: [Int: Location] = [:]
 
-func registerUserMenu() {
-    while true {
-        print("""
-            Welcome to registration window 
-            
-            1. Register Buyer
-            2. Register Seller
-            3. Register Service Provider
-            4. Exit
-            """)
-        let choice = readLine() ?? ""
+print(
+    """
+    ==============================
+    Textile Import-Export Platform
+    ==============================
+    """
+)
 
-        switch choice {
-        case "1":
-            MenuService.registerBuyer()
-        case "2":
-            MenuService.registerSeller()
-        case "3":
-            MenuService.registerServiceProvider()
-        case "4":
-            print("Exiting Registration menu 👋\n")
-            return
-        default:
-            print("Invalid choice ❌\n")
-        }
+print("Select Operations : ")
+mainMenu: while true {
+    print(
+        """
+            1. Register User
+            2. Buyer Operations
+            3. Seller Operations
+            4. Service Provider Operations
+            5. Exit 
+        """
+    )
+    let option = readLine()!
+    switch option {
+    case "1":
+        registerUserMenu()
+    case "2":
+        buyerMenu(buyer: buyers[0])
+    case "3":
+        sellerMenu(seller: sellers[0])
+    case "4":
+        serviceProviderMenu(provider: serviceProviders[0])
+    case "5":
+        break mainMenu
+    default:
+        print("Invalid Option")
     }
 }
-
-func serviceProviderMenu(provider: ServiceProvider) {
-
-    while true {
-        print("""
-        ==========================
-        Service Provider Menu
-        ==========================
-        1. Add New Location
-        2. Add Transport Route
-        3. View All Locations
-        4. Exit
-        """)
-
-        print("Enter choice:")
-        let choice = readLine() ?? ""
-
-        switch choice {
-        case "1":
-            TransportService.addLocation(provider: provider)
-        case "2":
-            TransportService.addTransport(provider: provider)
-        case "3":
-            TransportService.listLocations()
-        case "4":
-            print("Exiting Service Provider Menu 👋\n")
-            return
-        default:
-            print("Invalid choice ❌\n")
-        }
-    }
-}
-
-func buyerMenu(buyer: Buyer) {
-    
-    while true {
-        print("""
-        ==========================
-        Buyer Menu
-        ==========================
-        1. List all items
-        2. Buy item
-        3. View All Bills
-        4. Exit
-        """)
-
-        print("Enter choice:")
-        let choice = readLine() ?? ""
-
-        switch choice {
-        case "1":
-            MenuService.listAllItems()
-        case "2":
-            MenuService.buyItem(buyer: buyer)
-        case "3":
-            buyer.displayBills()
-        case "4":
-            print("Exiting Buyer Menu 👋\n")
-            return
-        default:
-            print("Invalid choice ❌\n")
-        }
-    }
-    
-}
-
-func sellerMenu(seller: Seller) {
-    
-    while true {
-           print("""
-           ==========================
-           Seller Menu
-           ==========================
-           1. Add New Item
-           2. View Inventory
-           3. Exit
-           """)
-
-           print("Enter choice:")
-           let choice = readLine() ?? ""
-
-           switch choice {
-           case "1":
-               print("Item name : ",terminator: " ")
-               let name = readLine()!
-               print("Item price : ",terminator: " ")
-               let price = IO.readDouble()
-               seller.addItem(Item(name: name, pricePerUnit: price))
-           case "2":
-               print("\(seller.inventory.listAll())")
-           case "3":
-               print("Exiting Service Provider Menu 👋\n")
-               return
-           default:
-               print("Invalid choice ❌\n")
-           }
-       }
-}
-
-print("""
-      ==============================
-      Textile Import-Export Platform
-      ==============================
-      """)
-
-registerUserMenu()
-sellerMenu(seller: sellers[0])
-MenuService.listAllItems()
-serviceProviderMenu(provider: serviceProviders[0])
-buyerMenu(buyer: buyers[0])
-
-
-
 
 //let A = Location(code: "A", pin: 1001, name: "Alpha")
 //let B = Location(code: "B", pin: 1002, name: "Beta")
@@ -165,4 +60,3 @@ buyerMenu(buyer: buyers[0])
 //} else {
 //    print("No route available")
 //}
-

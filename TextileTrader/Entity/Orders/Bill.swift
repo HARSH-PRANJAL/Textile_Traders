@@ -8,9 +8,7 @@ class Bill {
 
     func generateTotalAmount() -> Double {
 
-        let itemsCost = order.items.reduce(0.0) {
-            $0 + Double($1.quantity) * $1.item.pricePerUnit
-        }
+        let itemsCost = order.item.quantity * order.item.item.pricePerUnit
 
         let transportCost = order.shipment.totalFare
 

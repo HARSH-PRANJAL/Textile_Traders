@@ -1,4 +1,5 @@
 struct TransportEdge {
+    let contactPersonId: Int
     let from: Location
     let to: Location
     let type: TransportType

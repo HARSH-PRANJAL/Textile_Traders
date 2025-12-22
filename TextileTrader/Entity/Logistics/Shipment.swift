@@ -20,4 +20,14 @@ class Shipment {
         self.expectedTimeHours = expectedTimeHours
     }
     
+    func displayPath() -> String {
+            var path = ""
+            
+            for location in self.path {
+                path.append("\(location.name) -> ")
+            }
+            
+            return "Path: \(path)"
+    }
+    
 }

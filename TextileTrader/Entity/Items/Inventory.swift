@@ -15,8 +15,8 @@ class Inventory {
         Array(items.values)
     }
     
-    func sellItem(id: Int) -> Item? {
-        return items.removeValue(forKey: id)
+    func sellItem(id: Int) {
+        items.removeValue(forKey: id)
     }
     
     func hasItem(id: Int) -> Bool {
