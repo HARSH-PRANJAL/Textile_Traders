@@ -1,8 +1,9 @@
 struct MenuService {
     
     static func registerBuyer() {
-        print("Enter buyer name:")
+        print("Enter buyer name: ",terminator: " ")
         let name = readLine() ?? "Unknown Buyer"
+        print("Enter buyer password: ",terminator: " ")
         let password = readLine() ?? "123"
         
         if(password == "123"){
@@ -15,8 +16,9 @@ struct MenuService {
     }
 
     static func registerSeller() {
-        print("Enter seller name:")
+        print("Enter seller name: ",terminator: " ")
         let name = readLine() ?? "Unknown Seller"
+        print("Enter seller password: ",terminator: " ")
         let password = readLine() ?? "123"
         
         if(password == "123"){
@@ -29,8 +31,9 @@ struct MenuService {
     }
 
     static func registerServiceProvider() {
-        print("Enter service provider name:")
+        print("Enter service provider name: ",terminator: " ")
         let name = readLine() ?? "Unknown Provider"
+        print("Enter service provider password: ",terminator: " ")
         let password = readLine() ?? "123"
         
         if(password == "123"){
@@ -45,6 +48,15 @@ struct MenuService {
 
         serviceProviders.append(provider)
         print("Service Provider registered successfully ✅")
+    }
+    
+    static func listAllItems() {
+        
+        for seller in sellers {
+            print("\nSeller: \(seller.name) \(seller.id)")
+            print("\nItems : \n \(seller.inventory.listAll())")
+        }
+        
     }
     
 }

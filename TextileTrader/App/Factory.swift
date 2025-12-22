@@ -27,7 +27,6 @@ struct AppFactory {
         price: Double
     ) -> Item {
         return Item(
-            id: UUID(),
             name: name,
             pricePerUnit: price
         )
@@ -61,7 +60,7 @@ struct AppFactory {
         from: Location,
         to: Location,
         cargoWeight: Double,
-        graph: TransportGraph
+        graph: TransportGraph = transportGraph
     ) -> Shipment? {
 
         let calculator = FareRouteCalculator()
@@ -81,6 +80,19 @@ struct AppFactory {
             totalFare: route.totalFare,
             expectedTimeHours: route.totalTimeHours
         )
+    }
+    
+    static func createOrder(buyer: Buyer, seller: Seller, items: [OrderItem],from source: Location, to destination: Location) -> Order? {
+        
+        let order = Order(
+            buyer: buyer,
+            seller: seller,
+            items: items,
+            from: source,
+            to: destination
+        )
+        
+        return order
     }
 
 }

@@ -1,17 +1,21 @@
 import Foundation
 
 class Inventory {
-    private var items: [UUID: Item] = [:]
+    private var items: [Int: Item] = [:]
 
     func add(_ item: Item) {
         items[item.id] = item
     }
 
-    func getItem(id: UUID) -> Item? {
+    func getItem(id: Int) -> Item? {
         items[id]
     }
 
     func listAll() -> [Item] {
         Array(items.values)
+    }
+    
+    func sellItem(id: Int) -> Item? {
+        return items.removeValue(forKey: id)
     }
 }

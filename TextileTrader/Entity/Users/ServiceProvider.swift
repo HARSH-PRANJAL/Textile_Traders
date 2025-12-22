@@ -1,13 +1,15 @@
 import Foundation
 
 class ServiceProvider: User {
-
-    let id = UUID()
+    static var nextId: Int = 1
+    let id: Int
     let name: String
     let graph: TransportGraph
     var password: String
 
     init(name: String, graph: TransportGraph, password: String) {
+        self.id = ServiceProvider.nextId
+        ServiceProvider.nextId += 1
         self.name = name
         self.graph = graph
         self.password = password
