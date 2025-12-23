@@ -10,26 +10,47 @@ func registerUserMenu() {
             4. Exit
             """
         )
-        let choice = readLine() ?? ""
 
-        switch choice {
-        case "1":
-            registerBuyer()
-        case "2":
-            registerSeller()
-        case "3":
-            registerServiceProvider()
-        case "4":
+        print("Enter choice")
+        let choice = IO.readInt()
+
+        if choice <= 0 || choice > UserRegistrationAction.allCases.count {
+            print("Invalid choice")
+            return
+        }
+
+        let option = UserRegistrationAction.allCases[choice - 1]
+
+        switch option {
+        case .registerBuyer:
+            print("Enter buyer name: ", terminator: " ")
+            guard let name = readLine() else {
+                print("Buyer needs a name")
+                return
+            }
+            registerBuyer(name: name)
+        case .registerSeller:
+            print("Enter seller name: ", terminator: " ")
+            guard let name = readLine() else {
+                print("Seller needs a name")
+                return
+            }
+            registerSeller(name: name)
+        case .registerServiceProvider:
+            print("Enter service provider name: ", terminator: " ")
+            guard let name = readLine() else {
+                print("Service Provider needs a name")
+                return
+            }
+            registerServiceProvider(name: name)
+        case .exit:
             print("Exiting Registration menu 👋\n")
             return
-        default:
-            print("Invalid choice ❌\n")
         }
     }
 }
 
 func serviceProviderMenu(provider: ServiceProvider) {
-
     while true {
         print(
             """
@@ -44,20 +65,34 @@ func serviceProviderMenu(provider: ServiceProvider) {
         )
 
         print("Enter choice:")
-        let choice = readLine() ?? ""
+        let choice = IO.readInt()
 
-        switch choice {
-        case "1":
-            addLocation()
-        case "2":
-            addTransport(provider: provider)
-        case "3":
+        if choice <= 0 || choice > ServiceProviderAction.allCases.count {
+            print("Invalid input try again.")
+            continue
+        }
+
+        let option = ServiceProviderAction.allCases[choice - 1]
+
+        switch option {
+        case .addLocation:
+            print("Enter location code: ", terminator: " ")
+            let code = readLine() ?? ""
+
+            print("Enter location name: ", terminator: " ")
+            let name = readLine() ?? ""
+
+            print("Enter PIN code: ", terminator: " ")
+            let pin = IO.readInt()
+
+            addLocation(code: code, pin: pin, name: name)
+        case .createAndAddTransport:
+            createAndAddTransport(by: provider)
+        case .viewLocations:
             listLocations()
-        case "4":
+        case .exit:
             print("Exiting Service Provider Menu 👋\n")
             return
-        default:
-            print("Invalid choice ❌\n")
         }
     }
 }
@@ -72,26 +107,31 @@ func buyerMenu(buyer: Buyer) {
             ==========================
             1. List all items
             2. Buy item
-            3. View All Bills
+            3. View all bills
             4. Exit
             """
         )
 
         print("Enter choice:")
-        let choice = readLine() ?? ""
+        let choice = IO.readInt()
 
-        switch choice {
-        case "1":
+        if choice <= 0 || choice > BuyerAction.allCases.count {
+            print("Invalid input try again")
+            continue
+        }
+
+        let option = BuyerAction.allCases[choice - 1]
+
+        switch option {
+        case .listItems:
             listAllItems()
-        case "2":
-            buyItem(buyer: buyer)
-        case "3":
+        case .buyItem:
+            buyingItem(for: buyer)
+        case .displayAllBills:
             buyer.displayBills()
-        case "4":
+        case .exit:
             print("Exiting Buyer Menu 👋\n")
             return
-        default:
-            print("Invalid choice ❌\n")
         }
     }
 
@@ -112,22 +152,27 @@ func sellerMenu(seller: Seller) {
         )
 
         print("Enter choice:")
-        let choice = readLine() ?? ""
+        let choice = IO.readInt()
 
-        switch choice {
-        case "1":
+        if choice <= 0 || choice > SellerAction.allCases.count {
+            print("Invalid input try again")
+            continue
+        }
+
+        let option = SellerAction.allCases[choice - 1]
+
+        switch option {
+        case .addItem:
             print("Item name : ", terminator: " ")
             let name = readLine()!
             print("Item price : ", terminator: " ")
             let price = IO.readDouble()
             seller.addItem(Item(name: name, pricePerUnit: price))
-        case "2":
+        case .viewInventory:
             print("\(seller.listItems())")
-        case "3":
+        case .exit:
             print("Exiting Service Provider Menu 👋\n")
             return
-        default:
-            print("Invalid choice ❌\n")
         }
     }
 }

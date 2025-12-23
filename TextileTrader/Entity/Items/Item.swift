@@ -12,4 +12,8 @@ struct Item {
         self.pricePerUnit = pricePerUnit
         Item.nextId += 1
     }
+    
+    var description: String {
+        "Item: \(id) - \(name) (price: \(pricePerUnit) each)"
+    }
 }

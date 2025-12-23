@@ -13,18 +13,11 @@ class Buyer: User {
     }
 
     func buyItem(
-        _ itemId: Int,
+        orderItem: OrderItem,
         from seller: Seller,
-        quantity: Double,
         pickupLocation: Location,
         dropLocation: Location
     ) {
-        guard let item = seller.sellItemIfAvailable(itemId) else {
-            print("Item is out of stock 📦")
-            return
-        }
-        
-        let orderItem = OrderItem(item: item, quantity: quantity)
         guard
             let order = Order(
                 buyer: self,

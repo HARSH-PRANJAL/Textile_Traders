@@ -10,7 +10,7 @@ func listLocations() {
     }
 }
 
-func addTransport(provider: ServiceProvider) {
+func createAndAddTransport(by provider: ServiceProvider) {
 
     print("Enter Home location PIN: ", terminator: " ")
     let fromPin = IO.readInt()
@@ -33,17 +33,14 @@ func addTransport(provider: ServiceProvider) {
         2. Ship
         """
     )
-    let transportChoice = readLine() ?? ""
-
-    let transportType: TransportType
-
-    switch transportChoice {
-    case "1": transportType = .truck
-    case "2": transportType = .ship
-    default:
+    let choice = IO.readInt()
+    
+    if(choice <= 0 || choice > TransportType.allCases.count) {
         print("Invalid transport type ❌")
         return
     }
+
+    let transportType = TransportType.allCases[choice - 1]
 
     print("Enter fare per ton: ", terminator: " ")
     let fare = IO.readDouble()
@@ -62,16 +59,7 @@ func addTransport(provider: ServiceProvider) {
     print("Transport route added successfully ✅")
 }
 
-func addLocation() {
-
-    print("Enter location code: ", terminator: " ")
-    let code = readLine() ?? ""
-
-    print("Enter location name: ", terminator: " ")
-    let name = readLine() ?? ""
-
-    print("Enter PIN code: ", terminator: " ")
-    let pin = IO.readInt()
+func addLocation(code: String, pin: Int, name: String) {
 
     if locations[pin] != nil {
         print("Invalid or duplicate PIN ❌")

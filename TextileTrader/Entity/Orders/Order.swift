@@ -35,8 +35,6 @@ class Order {
         }
 
         let newShipment = Shipment(
-            from: from,
-            to: to,
             path: route.path,
             totalFare: route.totalFare,
             expectedTimeHours: route.totalTimeHours

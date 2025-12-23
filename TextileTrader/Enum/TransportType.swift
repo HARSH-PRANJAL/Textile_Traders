@@ -1,3 +1,5 @@
-enum TransportType {
-    case truck, ship, plane
+enum TransportType : CaseIterable {
+    case truck
+    case ship
+    case plane
 }

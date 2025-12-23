@@ -1,27 +1,17 @@
-func registerBuyer() {
-    print("Enter buyer name: ", terminator: " ")
-    let name = readLine() ?? "Unknown Buyer"
-
+func registerBuyer(name: String) {
     let buyer = Buyer(name: name)
     buyers.append(buyer)
     print("Buyer registered successfully ✅")
 }
 
-func registerSeller() {
-    print("Enter seller name: ", terminator: " ")
-    let name = readLine() ?? "Unknown Seller"
-
+func registerSeller(name: String) {
     let seller = Seller(name: name)
     sellers.append(seller)
     print("Seller registered successfully ✅")
 }
 
-func registerServiceProvider() {
-    print("Enter service provider name: ", terminator: " ")
-    let name = readLine() ?? "Unknown Provider"
-
+func registerServiceProvider(name: String) {
     let provider = ServiceProvider(name: name)
-
     serviceProviders.append(provider)
     print("Service Provider registered successfully ✅")
 }
@@ -40,7 +30,7 @@ func listAllItems() {
 
 }
 
-func buyItem(buyer: Buyer) {
+func buyingItem(for buyer: Buyer) {
     print("Enter item id : ", terminator: " ")
     let itemId = IO.readInt()
     print("Enter seller id : ", terminator: " ")
@@ -80,11 +70,17 @@ func buyItem(buyer: Buyer) {
         print("Invalid delivery location ‼️")
         return
     }
+    
+    guard let item = sellPerson.sellItemIfAvailable(itemId) else {
+        print("Item is out of stock")
+        return
+    }
+    
+    let orderItem = OrderItem(item: item, quantity: quantity)
 
     buyer.buyItem(
-        itemId,
+        orderItem: orderItem,
         from: sellPerson,
-        quantity: quantity,
         pickupLocation: source,
         dropLocation: destination
     )
