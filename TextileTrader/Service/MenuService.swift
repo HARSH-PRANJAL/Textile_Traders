@@ -75,11 +75,10 @@ func buyingItem(for buyer: Buyer) {
         print("Item is out of stock")
         return
     }
-    
-    let orderItem = OrderItem(item: item, quantity: quantity)
 
     buyer.buyItem(
-        orderItem: orderItem,
+        item: item,
+        quantity: quantity,
         from: sellPerson,
         pickupLocation: source,
         dropLocation: destination

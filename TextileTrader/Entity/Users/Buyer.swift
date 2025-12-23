@@ -13,11 +13,14 @@ class Buyer: User {
     }
 
     func buyItem(
-        orderItem: OrderItem,
+        item: Item,
+        quantity: Double,
         from seller: Seller,
         pickupLocation: Location,
         dropLocation: Location
     ) {
+
+        let orderItem = OrderItem(item: item, quantity: quantity)
         guard
             let order = Order(
                 buyer: self,
@@ -30,7 +33,7 @@ class Buyer: User {
             print("Source or Destination is not reachable ")
             return
         }
-        
+
         orders.append(order)
     }
 

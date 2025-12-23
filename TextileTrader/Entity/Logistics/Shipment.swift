@@ -24,4 +24,12 @@ class Shipment {
         return "Path: \(path)"
     }
     
+    var source : Location {
+        return self.path[0]
+    }
+    
+    var destination : Location {
+        return self.path[self.path.count - 1]
+    }
+    
 }
