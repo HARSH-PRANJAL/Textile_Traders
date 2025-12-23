@@ -56,15 +56,15 @@ func buyItem(buyer: Buyer) {
         }
     }
 
-    if let sellPerson = seller {
-        if !sellPerson.hasItem(withId: itemId) {
-            print(
-                "Seller \(sellPerson.name) is not the owner of item with id \(itemId)"
-            )
-            return
-        }
-    } else {
+    guard let sellPerson = seller else {
         print("Invalid seller id ‼️")
+        return
+    }
+    
+    if !sellPerson.hasItem(withId: itemId) {
+        print(
+            "Seller \(sellPerson.name) is not the owner of item with id \(itemId)"
+        )
         return
     }
 
@@ -83,7 +83,7 @@ func buyItem(buyer: Buyer) {
 
     buyer.buyItem(
         itemId,
-        from: seller!,
+        from: sellPerson,
         quantity: quantity,
         pickupLocation: source,
         dropLocation: destination

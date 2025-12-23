@@ -7,6 +7,6 @@ class Bill {
     }
 
     func generateTotalAmount() -> Double {
-        return order.totalAmount()
+        return order.totalAmount
     }
 }
