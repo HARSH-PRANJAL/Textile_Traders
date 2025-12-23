@@ -45,7 +45,7 @@ class Buyer: User {
         for order in orders {
             print("\n Bill ID: \(order.id)")
             print("Seller Name: \(order.seller.name)")
-            print("Total Amount: \(order.totalAmount())")
+            print("Total Amount: \(order.totalAmount)")
             print("Path: \(order.shipment.displayPath())\n")
         }
     }
