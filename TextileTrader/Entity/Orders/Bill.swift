@@ -7,11 +7,6 @@ class Bill {
     }
 
     func generateTotalAmount() -> Double {
-
-        let itemsCost = order.item.quantity * order.item.item.pricePerUnit
-
-        let transportCost = order.shipment.totalFare
-
-        return itemsCost + transportCost
+        return order.totalAmount()
     }
 }

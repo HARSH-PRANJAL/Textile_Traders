@@ -15,7 +15,7 @@ class Inventory {
         Array(items.values)
     }
     
-    func sellItem(id: Int) {
+    func sellItem(id: Int) -> Item? {
         items.removeValue(forKey: id)
     }
     

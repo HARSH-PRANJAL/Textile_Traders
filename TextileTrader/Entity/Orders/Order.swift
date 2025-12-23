@@ -45,4 +45,12 @@ class Order {
         self.shipment = newShipment
 
     }
+    
+    func totalItemValue() -> Double {
+        return item.quantity * item.item.pricePerUnit
+    }
+    
+    func totalAmount() -> Double {
+        return self.totalItemValue() + self.shipment.totalFare
+    }
 }

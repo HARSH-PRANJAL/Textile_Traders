@@ -122,7 +122,7 @@ func sellerMenu(seller: Seller) {
             let price = IO.readDouble()
             seller.addItem(Item(name: name, pricePerUnit: price))
         case "2":
-            print("\(seller.inventory.listAll())")
+            print("\(seller.listItems())")
         case "3":
             print("Exiting Service Provider Menu 👋\n")
             return

@@ -4,7 +4,7 @@ class Buyer: User {
     static var nextId: Int = 1
     let id: Int
     var name: String
-    var bills: [Bill] = []
+    var orders: [Order] = []
 
     init(name: String) {
         self.id = Buyer.nextId
@@ -13,13 +13,17 @@ class Buyer: User {
     }
 
     func buyItem(
-        _ item: Item,
+        _ itemId: Int,
         from seller: Seller,
         quantity: Double,
         pickupLocation: Location,
         dropLocation: Location
     ) {
-
+        guard let item = seller.sellItemIfAvailable(itemId) else {
+            print("Item is out of stock 📦")
+            return
+        }
+        
         let orderItem = OrderItem(item: item, quantity: quantity)
         guard
             let order = Order(
@@ -34,17 +38,15 @@ class Buyer: User {
             return
         }
         
-        seller.inventory.sellItem(id: item.id)
-        let newBill = Bill(order: order)
-        self.bills.append(newBill)
+        orders.append(order)
     }
 
     func displayBills() {
-        for bill in bills {
-            print("\n Bill ID: \(bill.order.id)")
-            print("Seller Name: \(bill.order.seller.name)")
-            print("Total Amount: \(bill.generateTotalAmount())")
-            print("Path: \(bill.order.shipment.displayPath())\n")
+        for order in orders {
+            print("\n Bill ID: \(order.id)")
+            print("Seller Name: \(order.seller.name)")
+            print("Total Amount: \(order.totalAmount())")
+            print("Path: \(order.shipment.displayPath())\n")
         }
     }
 

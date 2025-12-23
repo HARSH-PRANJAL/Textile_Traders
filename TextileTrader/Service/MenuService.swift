@@ -20,7 +20,7 @@ func registerServiceProvider() {
     print("Enter service provider name: ", terminator: " ")
     let name = readLine() ?? "Unknown Provider"
 
-    let provider = ServiceProvider( name: name )
+    let provider = ServiceProvider(name: name)
 
     serviceProviders.append(provider)
     print("Service Provider registered successfully ✅")
@@ -31,7 +31,7 @@ func listAllItems() {
     for seller in sellers {
         print("\nSeller: \(seller.name) \(seller.id)")
 
-        for item in seller.inventory.listAll() {
+        for item in seller.listItems() {
             print("Item ID : \(item.id)")
             print("Item : \(item.name)")
             print("Item Unit Price : \(item.pricePerUnit)")
@@ -56,13 +56,15 @@ func buyItem(buyer: Buyer) {
         }
     }
 
-    if seller == nil {
-        print(" Seller not found ‼️ ")
-        return
-    }
-
-    guard let item = seller!.inventory.getItem(id: itemId) else {
-        print(" Item not found ‼️ ")
+    if let sellPerson = seller {
+        if !sellPerson.hasItem(withId: itemId) {
+            print(
+                "Seller \(sellPerson.name) is not the owner of item with id \(itemId)"
+            )
+            return
+        }
+    } else {
+        print("Invalid seller id ‼️")
         return
     }
 
@@ -80,7 +82,7 @@ func buyItem(buyer: Buyer) {
     }
 
     buyer.buyItem(
-        item,
+        itemId,
         from: seller!,
         quantity: quantity,
         pickupLocation: source,

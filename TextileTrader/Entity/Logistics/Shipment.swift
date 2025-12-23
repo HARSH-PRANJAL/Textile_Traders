@@ -1,11 +1,11 @@
 class Shipment {
-
+    
     let from: Location
     let to: Location
     let path: [Location]
     let totalFare: Double
     let expectedTimeHours: Double
-
+    
     init(
         from: Location,
         to: Location,
@@ -21,13 +21,13 @@ class Shipment {
     }
     
     func displayPath() -> String {
-            var path = ""
-            
-            for location in self.path {
-                path.append("\(location.name) -> ")
-            }
-            
-            return "Path: \(path)"
+        var path = ""
+        
+        for location in self.path {
+            path.append("\(location.name) -> ")
+        }
+        
+        return "Path: \(path)"
     }
     
 }
