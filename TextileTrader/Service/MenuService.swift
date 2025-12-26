@@ -1,19 +1,25 @@
 func registerBuyer(name: String) {
+    
     let buyer = Buyer(name: name)
     buyers.append(buyer)
     print("Buyer registered successfully ✅")
+    
 }
 
 func registerSeller(name: String) {
+    
     let seller = Seller(name: name)
     sellers.append(seller)
     print("Seller registered successfully ✅")
+    
 }
 
 func registerServiceProvider(name: String) {
+    
     let provider = ServiceProvider(name: name)
     serviceProviders.append(provider)
     print("Service Provider registered successfully ✅")
+    
 }
 
 func listAllItems() {
@@ -30,33 +36,20 @@ func listAllItems() {
 
 }
 
-func buyingItem(for buyer: Buyer) {
+func initiateItemPurchase(for buyer: Buyer, from seller: Seller) {
+
     print("Enter item id : ", terminator: " ")
     let itemId = IO.readInt()
-    print("Enter seller id : ", terminator: " ")
-    let sellerId = IO.readInt()
-    print("Enter Item Quantity : ", terminator: " ")
-    let quantity = IO.readDouble()
 
-    var seller: Seller? = nil
-
-    for s in sellers {
-        if s.id == sellerId {
-            seller = s
-        }
-    }
-
-    guard let sellPerson = seller else {
-        print("Invalid seller id ‼️")
-        return
-    }
-    
-    if !sellPerson.hasItem(withId: itemId) {
+    if !seller.hasItem(withId: itemId) {
         print(
-            "Seller \(sellPerson.name) is not the owner of item with id \(itemId)"
+            "Seller \(seller.name) is not the owner of item with id \(itemId)"
         )
         return
     }
+
+    print("Enter Item Quantity : ", terminator: " ")
+    let quantity = IO.readDouble()
 
     print("Enter pickup location pin : ", terminator: " ")
     let pickupPin = IO.readInt()
@@ -70,18 +63,22 @@ func buyingItem(for buyer: Buyer) {
         print("Invalid delivery location ‼️")
         return
     }
-    
-    guard let item = sellPerson.sellItemIfAvailable(itemId) else {
+
+    guard let item = seller.sellItemIfAvailable(itemId) else {
         print("Item is out of stock")
         return
     }
 
-    buyer.buyItem(
+    let isCompleted = buyer.buyItem(
         item: item,
         quantity: quantity,
-        from: sellPerson,
+        from: seller,
         pickupLocation: source,
         dropLocation: destination
     )
+
+    if !isCompleted {
+        let _ = seller.addItem(item)
+    }
 
 }

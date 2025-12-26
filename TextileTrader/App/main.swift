@@ -18,27 +18,57 @@ print("Select Operations : ")
 mainMenu: while true {
     print(
         """
-            1. Register User
-            2. Buyer Operations
-            3. Seller Operations
-            4. Service Provider Operations
-            5. Exit 
+
+        ==========================
+                 Main Menu
+        ==========================
+
         """
     )
-    let option = readLine()!
+
+    for (index, option) in MainMenu.allCases.enumerated() {
+        print("\(index + 1). \(option.description)")
+    }
+
+    print("Enter choice")
+    let choice = IO.readInt()
+
+    if choice <= 0 || choice > MainMenu.allCases.count {
+        print("Invalid choice")
+        continue mainMenu
+    }
+
+    let option = MainMenu.allCases[choice - 1]
+    
     switch option {
-    case "1":
+        
+    case .registerUser:
         registerUserMenu()
-    case "2":
-        buyerMenu(buyer: buyers[0])
-    case "3":
-        sellerMenu(seller: sellers[0])
-    case "4":
-        serviceProviderMenu(provider: serviceProviders[0])
-    case "5":
+        
+    case .buyerOperations:
+        guard let buyer = buyers.first else {
+            print("Registered buyer not found")
+            continue mainMenu
+        }
+        buyerMenu(buyer: buyer)
+        
+    case .sellerOperations:
+        guard let seller = sellers.first else {
+            print("Registered seller not found")
+            continue mainMenu
+        }
+        sellerMenu(seller: seller)
+        
+    case .serviceProviderOperations:
+        guard let provider = serviceProviders.first else {
+            print("Registered service provider not found")
+            continue mainMenu
+        }
+        serviceProviderMenu(provider: provider)
+        
+    case .exit:
         break mainMenu
-    default:
-        print("Invalid Option")
+        
     }
 }
 

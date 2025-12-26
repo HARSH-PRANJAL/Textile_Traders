@@ -3,23 +3,26 @@ import Foundation
 class Inventory {
     private var items: [Int: Item] = [:]
 
-    func add(_ item: Item) {
+    func add(_ item: Item) -> Bool{
+        
         items[item.id] = item
+        return self.hasItem(id: item.id)
+        
     }
 
     func getItem(id: Int) -> Item? {
-        items[id]
+        return items[id]
     }
 
     func listAll() -> [Item] {
-        Array(items.values)
+        return Array(items.values)
     }
     
     func sellItem(id: Int) -> Item? {
-        items.removeValue(forKey: id)
+        return items.removeValue(forKey: id)
     }
     
     func hasItem(id: Int) -> Bool {
-        items.keys.contains(id)
+        return items.keys.contains(id)
     }
 }

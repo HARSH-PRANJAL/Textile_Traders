@@ -5,15 +5,17 @@ struct Item {
     let id: Int
     let name: String
     let pricePerUnit: Double
-    
+
     init(name: String, pricePerUnit: Double) {
+
         self.id = Item.nextId
         self.name = name
         self.pricePerUnit = pricePerUnit
         Item.nextId += 1
+
     }
-    
+
     var description: String {
-        "Item: \(id) - \(name) (price: \(pricePerUnit) each)"
+        return "Item: \(id) - \(name) (price: \(pricePerUnit) each)"
     }
 }

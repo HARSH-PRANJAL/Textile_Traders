@@ -8,39 +8,20 @@ class Order {
     let item: OrderItem
     let shipment: Shipment
 
-    init?(
+    init(
         buyer: Buyer,
         seller: Seller,
         item: OrderItem,
-        from: Location,
-        to: Location
+        shipment: Shipment
     ) {
+        
         self.id = Order.nextId
         Order.nextId += 1
         self.buyer = buyer
         self.seller = seller
         self.item = item
-
-        guard
-            let route = calculateFare(
-                from: from,
-                to: to,
-                cargoWeight: item.quantity
-            )
-        else {
-            print(
-                "\n Error in creating new order. Shipment is not possible to this location ‼️\n"
-            )
-            return nil
-        }
-
-        let newShipment = Shipment(
-            path: route.path,
-            totalFare: route.totalFare,
-            expectedTimeHours: route.totalTimeHours
-        )
-
-        self.shipment = newShipment
+        self.shipment = shipment
+        
 
     }
     

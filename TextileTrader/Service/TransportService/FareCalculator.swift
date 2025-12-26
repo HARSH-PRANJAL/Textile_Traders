@@ -19,7 +19,6 @@ func calculateFare(
     timeDistance[source] = 0
 
     while true {
-
         var current: Location? = nil
         var minValue = Double.infinity
 
@@ -64,14 +63,11 @@ func calculateFare(
     var current: Location? = destination
 
     while current != nil {
-
         guard let loc = current else {
             break
         }
-
         path.append(loc)
         current = previous[loc]
-
     }
 
     return FareRouteResult(
@@ -79,4 +75,5 @@ func calculateFare(
         totalTimeHours: finalTime,
         path: path.reversed()
     )
+    
 }

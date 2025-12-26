@@ -12,8 +12,8 @@ class Seller: User {
         self.name = name
     }
     
-    func addItem(_ item: Item) {
-        inventory.add(item)
+    func addItem(_ item: Item) -> Bool {
+        return inventory.add(item)
     }
     
     func hasItem(withId id: Int) -> Bool {

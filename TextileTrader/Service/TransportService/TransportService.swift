@@ -34,8 +34,8 @@ func createAndAddTransport(by provider: ServiceProvider) {
         """
     )
     let choice = IO.readInt()
-    
-    if(choice <= 0 || choice > TransportType.allCases.count) {
+
+    if choice <= 0 || choice > TransportType.allCases.count {
         print("Invalid transport type ❌")
         return
     }
@@ -71,8 +71,31 @@ func addLocation(code: String, pin: Int, name: String) {
         pin: pin,
         name: name
     )
-    
+
     locations[pin] = location
 
     print("Location added successfully ✅")
+}
+
+func createShipment(from: Location, to: Location, cargoWight: Double)
+    -> Shipment?
+{
+    
+    guard
+        let route = calculateFare(
+            from: from,
+            to: to,
+            cargoWeight: cargoWight
+        )
+    else {
+        return nil
+    }
+
+    let newShipment = Shipment(
+        path: route.path,
+        totalFare: route.totalFare,
+        expectedTimeHours: route.totalTimeHours
+    )
+    return newShipment
+    
 }

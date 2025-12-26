@@ -6,9 +6,11 @@ class ServiceProvider: User {
     var name: String
 
     init(name: String) {
+        
         self.id = ServiceProvider.nextId
         ServiceProvider.nextId += 1
         self.name = name
+        
     }
 
     func addTransport(
@@ -19,6 +21,7 @@ class ServiceProvider: User {
         timeHours: Double,
         graph: TransportGraph = transportGraph
     ) {
+        
         let edge = TransportEdge(
             contactPersonId: self.id,
             from: from,
@@ -28,5 +31,6 @@ class ServiceProvider: User {
             travelTimeHours: timeHours
         )
         graph.addEdge(edge)
+        
     }
 }

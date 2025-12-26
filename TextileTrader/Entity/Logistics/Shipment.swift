@@ -1,5 +1,4 @@
 class Shipment {
-    
     let path: [Location]
     let totalFare: Double
     let expectedTimeHours: Double
@@ -9,12 +8,15 @@ class Shipment {
         totalFare: Double,
         expectedTimeHours: Double
     ) {
+        
         self.path = path
         self.totalFare = totalFare
         self.expectedTimeHours = expectedTimeHours
+        
     }
     
     func displayPath() -> String {
+        
         var path = ""
         
         for location in self.path {
@@ -22,14 +24,26 @@ class Shipment {
         }
         
         return "Path: \(path)"
+        
     }
     
-    var source : Location {
-        return self.path[0]
+    var source : Location? {
+        
+        if let source = self.path.first {
+            return source
+        } else {
+            return nil
+        }
+        
     }
     
-    var destination : Location {
-        return self.path[self.path.count - 1]
+    var destination : Location? {
+        
+        if let destination = self.path.last {
+            return destination
+        } else {
+            return nil
+        }
+        
     }
-    
 }
